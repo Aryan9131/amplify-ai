@@ -35,6 +35,39 @@ const stats = [
 ];
 
 export const StatsBar = () => {
+
+    //  const stats = [
+    //     {
+    //         label: "Credits Remaining",
+    //         value: user && (user?.credits + user?.purchasedCredits) - user?.monthlyCreditsUsed,
+    //         total: user?.credits,
+    //         icon: Zap,
+    //         color: "text-blue-600",
+    //         progress: (user && ((user?.credits + user?.purchasedCredits) - user?.monthlyCreditsUsed) / user?.credits) || 0
+    //     },
+    //     {
+    //         label: "Image Created",
+    //         value: user?.imageGeneratedThisMonth,
+    //         icon: Sparkles,
+    //         color: "text-orange-600",
+    //         trend: "+12% from last month"
+    //     },
+    //     {
+    //         label: "Video Created",
+    //         value: user?.videoGeneratedThisMonth,
+    //         icon: TrendingUp,
+    //         color: "text-green-600",
+    //         trend: "All time"
+    //     },
+    //     {
+    //         label: "Time Saved",
+    //         value: "42h",
+    //         icon: Clock,
+    //         color: "text-yellow-700",
+    //         trend: "This month"
+    //     }
+    // ];
+
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 my-8 ">
             {stats.map((stat, index) => (

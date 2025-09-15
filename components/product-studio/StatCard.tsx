@@ -1,10 +1,13 @@
 import React from 'react'
 import { Card, CardContent, CardHeader } from '../ui/card'
 import { Wand2 } from 'lucide-react'
+
+
 const StatCard = () => {
+
     return (
         <>
-            <Card className='bg-gradient-to-br from-[#030918] to-gray-600/20 h-45 gap-2'>
+            <Card className='bg-gradient-to-br from-gray-50 via-gray-100 to-white dark:from-[#030918] dark:via-[#030915] dark:to-gray-600/20 h-45 gap-2'>
                 <CardHeader >
                     <h3 className='text-lg font-semibold'>Studio Stats</h3>
                 </CardHeader>
@@ -23,7 +26,7 @@ const StatCard = () => {
                     </div>
                 </CardContent>
             </Card>
-            <Card className='bg-gradient-to-br from-[#030918] to-gray-600/20 h-45 gap-2'>
+            <Card className='bg-gradient-to-br from-gray-50 via-gray-100 to-white dark:from-[#030918] dark:via-[#030915] dark:to-gray-600/20 h-45 gap-2'>
                 <CardHeader className='flex gap-2 items-center'>
                     <Wand2 className='w-5 h-5 text-[#675ad4]' />
                     <h3 className='text-lg font-semibold'>Quick Tips</h3>

@@ -68,7 +68,7 @@ const page = () => {
                             { icon: Download, title: "High Quality", desc: "Professional-grade output" },
                             { icon: Eye, title: "Multiple Formats", desc: "Images, videos & animations" }
                         ].map((feature, i) => (
-                            <div key={i} className="flex items-center gap-3 p-4 rounded-lg hover:bg-blue-50/10 transition-colors">
+                            <div key={i} className="flex items-center gap-3 p-4 rounded-lg hover:bg-blue-100/30 dark:hover:bg-blue-50/10 transition-colors">
                                 <div className="p-2 rounded-lg bg-primary/10">
                                     <feature.icon className="h-5 w-5 text-primary" />
                                 </div>
@@ -82,7 +82,7 @@ const page = () => {
                 </div>
             </div>
             :
-            <ImageGenerationInterface />
+            <ImageGenerationInterface onClick={()=>setClickedFeature(undefined)}/>
     )
 }
 

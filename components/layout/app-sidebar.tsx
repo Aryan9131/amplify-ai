@@ -11,7 +11,7 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
-import { ChevronDown, HelpCircle } from "lucide-react"
+import { ChevronDown, HelpCircle, Loader } from "lucide-react"
 
 import {
   Calendar,
@@ -32,7 +32,10 @@ import logo from '@/assets/creative-guru-logo.png'
 import { usePathname } from "next/navigation";
 import { ModeToggle } from "./toggle-theme";
 import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton } from "@clerk/nextjs";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
+import { useStoreUser } from "@/hooks/use-store-user";
+import Link from "next/link";
+import Setting from "./setting-menu";
 
 // Menu items.
 const mainNavItems = [
@@ -59,14 +62,18 @@ const mainNavItems = [
   },
   {
     title: "Upgrade",
-    url: "/upgrade",
+    url: "/billing",
     icon: CreditCard,
   },
 ];
 
 export function AppSidebar() {
-  const url = usePathname();
-  console.log("Current URL:", url);
+  const path = usePathname();
+  const {isLoading} = useStoreUser();
+  console.log("Current URL:");
+  if(path=="/" ||  path.includes('/sign-in') || path.includes('/sign-up')){
+    return null;
+  }
   return (
     <Sidebar >
       <SidebarHeader className="flex justify-between items-center p-4">
@@ -100,14 +107,14 @@ export function AppSidebar() {
                             {item.subItems?.map((subItem) => (
                               <SidebarMenuItem key={subItem.title} >
                                 <SidebarMenuButton asChild disabled={subItem.disabled} className={subItem.disabled ? "text-gray-500 cursor-not-allowed font-semibold gap-4" : "font-semibold hover:text-sidebar-accent-foreground rounded-md"}>
-                                  <a href={subItem.disabled ? "#" : subItem.url}>
+                                  <Link href={subItem.disabled ? "#" : subItem.url}>
                                     <span>{subItem.title}</span>
                                     {subItem.disabled && (
                                       <span className="text-xs bg-[#F66E28]/20 text-[#F66E28] border border-[#F66E28]/30 opacity-60 italic px-3 py-1 rounded-sm">
                                         Soon
                                       </span>
                                     )}
-                                  </a>
+                                  </Link>
                                 </SidebarMenuButton>
                               </SidebarMenuItem>
                             ))}
@@ -116,11 +123,11 @@ export function AppSidebar() {
                       </CollapsibleContent>
                     </Collapsible>
                   ) : (
-                    <SidebarMenuButton asChild className={url === item.url ? "text-blue-600 hover:text-blue-700 bg-blue-50 dark:text-blue-800 dark:bg-sidebar-accent rounded-md font-semibold" : "font-medium hover:text-sidebar-accent-foreground rounded-md"}>
-                      <a href={item.url}>
+                    <SidebarMenuButton asChild className={path === item.url ? "text-blue-600 hover:text-blue-700 bg-blue-50 dark:text-blue-800 dark:bg-sidebar-accent rounded-md font-semibold" : "font-medium hover:text-sidebar-accent-foreground rounded-md"}>
+                      <Link href={item.url!}>
                         <item.icon className="h-4 w-4" />
                         <span>{item.title}</span>
-                      </a>
+                      </Link>
                     </SidebarMenuButton>
                   )}
                 </SidebarMenuItem>
@@ -145,13 +152,15 @@ export function AppSidebar() {
                     </div>
                     {/* Settings Icon */}
                     <SidebarMenuButton asChild size="sm" variant="outline" className="h-8 w-8 p-0">
-                      <a href="/settings">
-                        <Settings className="h-4 w-4" />
-                      </a>
+                       <Setting/>
                     </SidebarMenuButton>
                   </div>
                 </SidebarMenuItem>
               </SignedIn>
+
+               <SidebarMenuItem>
+                 {isLoading && <Loader className="animate-spin" />}
+              </SidebarMenuItem>
 
               {/* Sign Out Button */}
               <SidebarMenuItem>

@@ -1,3 +1,4 @@
+'use client'
 import { Button } from "@/components/ui/button";
 import Image, { StaticImageData } from "next/image";
 
@@ -11,15 +12,15 @@ import {
   Sparkles
 } from "lucide-react";
 import { StatsBar } from "@/components/dashboard/Statbar";
-import { ModeToggle } from "@/components/toggle-theme";
+import { ModeToggle } from "@/components/layout/toggle-theme";
 import { SidebarProvider } from "@/components/ui/sidebar";
 
 import dashboardHero from "@/assets/dashboard-hero.jpg";
 import productStudioHero from "@/assets/product-studio-hero.jpg";
 import youtubeIcon from "@/assets/youtube-icon.png";
 import { ModuleCard } from "@/components/dashboard/ModuleCard";
+import { usePathname } from "next/navigation";
 
-// import { useRouter } from "next/navigation";
 
 interface Module {
   id: string;
@@ -81,6 +82,9 @@ const modules: Module[] = [
 ];
 
 export default function Home() {
+  const path = usePathname();
+  console.log("url is : ", path)
+  
   return (
     <div className="p-5 ">
       <div className="relative w-full mx-auto rounded-lg p-4 bg-white dark:bg-[#11151c]">
